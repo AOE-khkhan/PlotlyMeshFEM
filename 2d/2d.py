@@ -5,5 +5,6 @@ db.importNodes('node.txt')
 db.importElements('element.txt')
 
 if __name__ == "__main__":
-    db.createData()
+    db.createElements()
+    db.createContour()
     db.draw()
