@@ -10,14 +10,6 @@ class database(object):
         self.plotdata = []
     def importNodes(self,fileName):
         self.nodes = np.loadtxt(fileName,dtype=[('id','uint32'),('xy','2float32'),('val','float32')])
-        print(self.nodes)
-        a = list(self.nodes['val'])
-        print(a)
-        a = [i*1000 for i in a]
-        print(a)
-        a = np.asarray(a)
-        print(a)
-        self.nodes = np.asarray(a)
     def importElements(self,fileName):
         self.elements = np.loadtxt(fileName,dtype=[('id','uint32'), ('nodes','4uint32')])
         self.elements.sort(order='id')
