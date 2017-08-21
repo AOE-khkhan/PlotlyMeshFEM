@@ -37,13 +37,12 @@ class database(object):
                 y = coordinate[:,1],
                 mode='markers+lines+text',
                 marker=dict(
-                    size=3,
+                    size=1,
                 ),
                 line=dict(
-                    color='#1f77b4',
-                    width=1
+                    color='#cccccc',
+                    width=0.5
                 ),
-                # connectgaps=False,
                 hovertext=hovertext,
                 textfont=dict(
                     family='sans serif',
@@ -54,20 +53,22 @@ class database(object):
                 )
             self.plotdata.append(data)
     def createContour(self):
+        val = self.nodes['val']
+        contourMax = np.max(val)
+        contourMin = np.min(val)
+        contourSize = 0.1*(contourMax - contourMin)
         coordinate = self.nodes['xy']
         val = self.nodes['val']
         data = go.Contour(
             x=coordinate[:,0],
             y=coordinate[:,1],
             z=val,
-        #     z=[[10, 10.625, 12.5, 15.625, 20],
-        #    [5.625, 6.25, 8.125, 11.25, 15.625],
-        #    [2.5, 3.125, 5., 8.125, 12.5],
-        #    [0.625, 1.25, 3.125, 6.25, 10.625],
-        #    [0, 0.625, 2.5, 5.625, 10]],
-        #     x=[-9, -6, -5 , -3, -1],
-        #     y=[0, 1, 4, 5, 7],
-            connectgaps=False,
+            # connectgaps=False,
+            contours=dict(
+                start=contourMin,
+                end=contourMax,
+                size=contourSize,
+            ),
         )
         self.plotdata.append(data)
     def draw(self):
